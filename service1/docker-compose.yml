@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  web:
+    image: tutum/dnsutils
+    entrypoint: /printdns.sh
+    environment:
+      - DB=db
+    volumes:
+      - ./printdns.sh:/printdns.sh
+  db:
+    image: mysql
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
